@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="bran&#39;s Blog">
 <meta property="og:description" content="这次周赛的后两题挺有意思的，但是我一个也没写出来，哭  记录一下解法 A.删除某些元素后的数组均值签到 12345678910class Solution &amp;#123;public:    double trimMean(vector&lt;int&gt;&amp; arr) &amp;#123;        sort(arr.begin(),arr.end());        double ans&#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/leetcode双周赛-37/C.png">
+<meta property="og:image" content="http://example.com/2020/10/18/leetcode%E5%8F%8C%E5%91%A8%E8%B5%9B-37/C.png">
 <meta property="article:published_time" content="2020-10-18T15:54:47.000Z">
-<meta property="article:modified_time" content="2020-10-19T03:26:50.542Z">
+<meta property="article:modified_time" content="2020-10-19T03:39:22.335Z">
 <meta property="article:author" content="bran">
 <meta property="article:tag" content="dp">
 <meta property="article:tag" content="组合数学">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="双周赛">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/leetcode双周赛-37/C.png">
+<meta name="twitter:image" content="http://example.com/2020/10/18/leetcode%E5%8F%8C%E5%91%A8%E8%B5%9B-37/C.png">
 
 <link rel="canonical" href="http://example.com/2020/10/18/leetcode%E5%8F%8C%E5%91%A8%E8%B5%9B-37/">
 
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-19 11:26:50" itemprop="dateModified" datetime="2020-10-19T11:26:50+08:00">2020-10-19</time>
+                <time title="修改时间：2020-10-19 11:39:22" itemprop="dateModified" datetime="2020-10-19T11:39:22+08:00">2020-10-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,7 +250,7 @@
 <a id="more"></a>
 <h2 id="B-网络信号最好的坐标"><a href="#B-网络信号最好的坐标" class="headerlink" title="B.网络信号最好的坐标"></a>B.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coordinate-with-maximum-network-quality/">网络信号最好的坐标</a></h2><p>暴力枚举被覆盖的所有点，对这些点按照信号大小和位置排序就可以了。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> x,y,sig;</span><br><span class="line">        Node()&#123;&#125;</span><br><span class="line">        Node(<span class="keyword">int</span> xx,<span class="keyword">int</span> yy,<span class="keyword">int</span> ss)&#123;</span><br><span class="line">            x=xx;y=yy;sig=ss;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Node nd)<span class="keyword">const</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(sig==nd.sig)&#123;</span><br><span class="line">                <span class="keyword">if</span>(x==nd.x)<span class="keyword">return</span> y&lt;nd.y;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> x&lt;nd.x;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> sig&gt;nd.sig;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">double</span> x1,<span class="keyword">double</span> y1,<span class="keyword">double</span> x2,<span class="keyword">double</span> y2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sqrt</span>((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">bestCoordinate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; towers, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Node&gt;nd;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=-r;i&lt;=<span class="number">50</span>+r;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=-r;j&lt;=<span class="number">50</span>+r;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;towers.size();k++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(dis(i,j,towers[k][<span class="number">0</span>],towers[k][<span class="number">1</span>])&lt;=r)&#123;</span><br><span class="line">                        sum+=towers[k][<span class="number">2</span>]/(dis(i,j,towers[k][<span class="number">0</span>],towers[k][<span class="number">1</span>])+<span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                nd.push_back(Node(i,j,sum));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(nd.begin(),nd.end());</span><br><span class="line">        <span class="keyword">return</span> &#123;nd[<span class="number">0</span>].x,nd[<span class="number">0</span>].y&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="C-大小为-K-的不重叠线段的数目"><a href="#C-大小为-K-的不重叠线段的数目" class="headerlink" title="C.大小为 K 的不重叠线段的数目"></a>C.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-sets-of-k-non-overlapping-line-segments/">大小为 K 的不重叠线段的数目</a></h2><p><img src="/leetcode双周赛-37/C.png" alt=""></p>
+<h2 id="C-大小为-K-的不重叠线段的数目"><a href="#C-大小为-K-的不重叠线段的数目" class="headerlink" title="C.大小为 K 的不重叠线段的数目"></a>C.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-sets-of-k-non-overlapping-line-segments/">大小为 K 的不重叠线段的数目</a></h2><img src="/2020/10/18/leetcode%E5%8F%8C%E5%91%A8%E8%B5%9B-37/C.png" class="">
 <p>这题我一开始用dp[i][j]表示k个线段覆盖n个点的方案数，结果到最后也没有找到转移方程，赛后才发现状态表示少了一个维度。正确的状态定义如下</p>
 <ul>
 <li>f[n][k]表示用k条线段覆盖0,1,…n这些点，并且点n没有被第k条线段的右端点覆盖的方案数</li>
@@ -316,13 +316,6 @@ y=(x-add)/mul=(x-add)*inv(mul),</script><p>然后将y存入数组a中，这样�
 
 
         
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/10/10/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
       </footer>
     
   </article>
@@ -397,20 +390,20 @@ y=(x-add)/mul=(x-add)*inv(mul),</script><p>然后将y存入数组a中，这样�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
