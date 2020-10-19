@@ -35,7 +35,8 @@ g[i][j]=g[i-1][j]</script></li>
 <script type="math/tex; mode=display">
 0<=l_1<r_1<l_2<r2<\cdots<l_k<r_k<n+k-1</script><p>由于$(l’_1,\cdots,l’_k,r’_1,\cdots,r’_k)$与$(l_1,\cdots,l_k,r_1,\cdots,r_k)$可以一一对应，所以他们的方案数也应该是相同的，所以答案等于在n+k-1个数中任选$2k$个的方案数，最终答案为</p>
 <script type="math/tex; mode=display">
-\left(\matrix{n+k-1\\2k}\right)</script><h2 id="D-奇妙序列"><a href="#D-奇妙序列" class="headerlink" title="D.奇妙序列"></a>D.<a href="https://leetcode-cn.com/problems/fancy-sequence/">奇妙序列</a></h2><p>这题用线段树是可以做的，但是由于每次更新操作都是对当前的整个序列（对于最终的序列a来说，则是每次对a的前缀）进行操作，所以可以用更简洁的做法来解决。</p>
+\left(\matrix{n+k-1\\2k}\right)</script><h2 id="D-奇妙序列"><a href="#D-奇妙序列" class="headerlink" title="D.奇妙序列"></a>D.<a href="https://leetcode-cn.com/problems/fancy-sequence/">奇妙序列</a></h2><img src="/2020/10/18/leetcode%E5%8F%8C%E5%91%A8%E8%B5%9B-37/D.png" class="">
+<p>这题用线段树是可以做的，但是由于每次更新操作都是对当前的整个序列（对于最终的序列a来说，则是每次对a的前缀）进行操作，所以可以用更简洁的做法来解决。</p>
 <p>具体做法是维护两个标记add和mul。当序列需要进行更新操作时，并不对整个序列做更新，而是只更新这两个标记（类似线段树的lazy标记），当遇到对a[i]的查询操作时，返回值为a[i]*mul+add。</p>
 <p>但是这样还有一个问题：当一个新的元素x插入进来时，如果直接将他存到数组a中，查询时会得到错误的结果，因为add和mul中还记录了x插入之前的更新信息。因此，为了保持这两个标记对这个新元素x的正确性，我们需要在插入之前先对x先做一下逆操作，即令</p>
 <script type="math/tex; mode=display">
